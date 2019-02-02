@@ -1,0 +1,44 @@
+@import '_utils.scss';
+
+.Header {
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #b0afb0;
+    display: flex;
+    background-image: linear-gradient(#eeecee, #d3d1d3);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    > div {
+
+        display: flex;
+        align-items: center;
+    }
+    &-btn {
+        display: flex;
+        padding: 0 10px;
+        > div {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        > div:nth-child(1) {
+            background-color: #fc605c;
+            border: 1px solid #de4643;
+            margin-right: 9px;
+        }
+        > div:nth-child(2) {
+            background-color: #fdbc40;
+            border: 1px solid #dd9e33;
+            margin-right: 9px;
+        }
+        > div:nth-child(3) {
+            background-color: #34c749;
+            border: 1px solid #27aa35;
+        }
+    }
+    &-title {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
+}
