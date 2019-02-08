@@ -8,9 +8,6 @@ class User extends Component {
       <aside className="User">
         <div className="User-title">
           <div>바닐라코딩</div>
-          <div>
-
-          </div>
         </div>
         <div className="User-channel">
           <div>Channels</div>
@@ -19,12 +16,11 @@ class User extends Component {
         <div className="User-list">
           <div>
             <div>Direct Messages</div>
-            {/* <div></div> */}
           </div>
           {Object.keys(userInfo).map(id => {
             return (
               <div key={id} className="User-list-element">
-                <div className={userInfo[id].connected ? "User-connected" : "User-disconnected"}></div>
+                <div className={userInfo[id].connected ? "User-connected" : "User-disconnected"} />
                 <div>{userInfo[id].display_name}</div>
               </div>
             );

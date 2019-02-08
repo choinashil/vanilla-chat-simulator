@@ -10,7 +10,7 @@ function Content({ userInfo, message }) {
       <Header />
       <div>
         <User userInfo={userInfo}/>
-        <Message 
+        <Message
           message={message}
           userInfo={userInfo}
         />

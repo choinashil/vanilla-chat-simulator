@@ -4,54 +4,54 @@ import './Message.scss';
 class Message extends Component {
   constructor(props) {
     super(props);
-    this.message = React.createRef();
-  }
-  componentDidUpdate() {
-    this.message.current.scrollTop = this.message.current.scrollHeight;
+    this.messageList = React.createRef();
   }
 
-  foo(words) {
+  componentDidUpdate() {
+    this.messageList.current.scrollTop = this.messageList.current.scrollHeight;
+  }
+
+  addMarkupToMessage(message) {
     const bold = /\*\w+\*/g;
     const italic = /_\w+_/;
     const emoji = /:\w+:/;
-    const link = /(https?:\/\/[^\s?]+)/;
+    const link = /(https?:\/\/[^\s]+\w)/;
     const userName = /@\w+/g;
 
-    if (words.match(bold)) {
-      words.match(bold).map(target => {
-        const boldTarget = `<b>${target.slice(1, -1)}</b>`;
-        words = words.replace(target, boldTarget);
+    if (message.match(bold)) {
+      message.match(bold).map(word => {
+        const wordWithBTag = `<b>${word.slice(1, -1)}</b>`;
+        message = message.replace(word, wordWithBTag);
       });
     }
-    if (words.match(italic)) {
-      const italicTarget = '<i>' + words.match(italic)[0].slice(1, -1) + '</i>';
-      words = words.replace(italic, italicTarget);
+    if (message.match(italic)) {
+      const wordWithITag = `<i>${message.match(italic)[0].slice(1, -1)}</i>`;
+      message = message.replace(italic, wordWithITag);
     }
-    if (words.match(link)) {
-      const linkTarget = `<a href=${words.match(link)[0]}>${words.match(link)[0]}</a>`; 
-      words = words.replace(link, linkTarget);
+    if (message.match(link)) {
+      const wordWithATag = `<a href=${message.match(link)[0]}>${message.match(link)[0]}</a>`;
+      message = message.replace(link, wordWithATag);
     }
-    if (words.match(userName)) {
-      words.match(userName).map(user => {
-        const userNameTarget = `<span class="a">${user}</span>`;
-        words = words.replace(user, userNameTarget);
+    if (message.match(userName)) {
+      message.match(userName).map(user => {
+        const wordWithUserClass = `<span class="mentioned-user">${user}</span>`;
+        message = message.replace(user, wordWithUserClass);
       });
     }
-    if (words.match(emoji)) {
-      words = words.replace(':scream_cat:', '🙀');
-      words = words.replace(':facepalm:', '🙈');
-      words = words.replace(':ghost:', '👻');
-      words = words.replace(':sob:', '😭');
+    if (message.match(emoji)) {
+      message = message.replace(':scream_cat:', '🙀');
+      message = message.replace(':facepalm:', '🙈');
+      message = message.replace(':ghost:', '👻');
+      message = message.replace(':sob:', '😭');
     }
-    return words;
+    return message;
   }
 
   render() {
     const { message, userInfo } = this.props;
-
     return (
       <section className="Message">
-        <div className="Message-list" ref={this.message}>
+        <div className="Message-list" ref={this.messageList}>
           {Object.keys(message).map(id => {
             return (
               <div key={id} className="Message-list-element">
@@ -60,7 +60,7 @@ class Message extends Component {
                 </div>
                 <div>
                   <div>{userInfo[message[id].userId].display_name}</div>
-                  <div dangerouslySetInnerHTML = {{__html: this.foo(message[id].text)}} />
+                  <div dangerouslySetInnerHTML = {{__html: this.addMarkupToMessage(message[id].text)}} />
                 </div>
               </div>
             );

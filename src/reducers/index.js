@@ -3,8 +3,8 @@ import message from './message';
 import userInfo from './userInfo';
 
 const reducers = combineReducers({
-    message,
-    userInfo
+  message,
+  userInfo
 });
 
 export default reducers;

@@ -2,6 +2,7 @@ import * as types from '../actions/ActionTypes';
 
 export default function message(state = {}, action) {
   const message = {...state};
+
   switch(action.type) {
     case types.GET_MESSAGE:
       return {
@@ -23,7 +24,7 @@ export default function message(state = {}, action) {
       }
       return message;
 
-    default: 
+    default:
       return state;
-  } 
+  }
 }
