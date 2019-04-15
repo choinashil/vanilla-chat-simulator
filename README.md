@@ -20,6 +20,11 @@ $ yarn start (or npm start)
 ```
 
 
+## Skills
+- React
+- Redux
+- Scss
+
 ## Features
 
 - 데이터베이스에서 채팅 기록을 불러와 재생합니다.
